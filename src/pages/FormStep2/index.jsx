@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Container, Grid, Button, TextField } from '@mui/material';
 import { ArrowBackIos } from '@mui/icons-material';
 
-import './styles.css';
 import { FormContext } from '../../contexts/form';
 import Header from '../../components/Header';
 import VehicleCard from '../../components/VehicleCard';
@@ -60,7 +59,7 @@ export default function FormStep2() {
         <>
             <Header />
 
-            <Container maxWidth="md" id="container">
+            <Container maxWidth="md" className="container">
                 <Grid item xs={12} >
                     <Button variant="text" onClick={() => { navigate('/'); }}>
                         <ArrowBackIos />
@@ -73,21 +72,21 @@ export default function FormStep2() {
                         <VehicleCard vehicle={vehicle} />
                     </Grid>
 
-                    <Grid container xs={12} sm={8} id="right">
-                        <Grid item xs={12} p={1} id="topRight">
+                    <Grid container xs={12} sm={8} className="rightSide">
+                        <Grid item xs={12} p={1} className="topRight">
                             Concluir Agendamento
                         </Grid>
-                        <Grid item xs={12} id="topMonth">
+                        <Grid item xs={12} className="contentHeader">
                             {scheduled.dayOfWeek}, {scheduled.day} de {scheduled.month}, {scheduled.hour} horas
                         </Grid>
 
-                        <Grid container justifyContent="center" id="topDays">
-                            <Grid item xs={11} id="topDays">
+                        <Grid container justifyContent="center" className="contentTop">
+                            <Grid item xs={11} className="contentTop">
                                 <TextField fullWidth id="outlined-basic" label="Nome" variant="outlined" defaultValue={user.name} onChange={(e) => setUser(prevState => { return { ...prevState, name: e.target.value } })} />
                             </Grid>
                         </Grid>
 
-                        <Grid container justifyContent="space-around" id="topHours">
+                        <Grid container justifyContent="space-around" className="mediumContent">
                             <Grid item xs={5} id="inputEmail">
                                 <TextField fullWidth id="outlined-basic" label="E-mail" variant="outlined" defaultValue={user.email} onChange={(e) => setUser(prevState => { return { ...prevState, email: e.target.value } })} />
                             </Grid>
@@ -96,7 +95,7 @@ export default function FormStep2() {
                             </Grid>
                         </Grid>
 
-                        <Grid item xs={12} id="topButton">
+                        <Grid item xs={12} className="bottomContent">
                             <Button variant="contained" color="error" id="btnScheduled" onClick={schedule} disabled={!(user.name && user.email && user.telephone) ? true : false}>
                                 Concluir
                             </Button>

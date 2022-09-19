@@ -32,7 +32,119 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+.container {
+  height: calc(100vh - 100px);
+}
+
+.rightSide {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.topRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2E323C;
+  color: #fff;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+
+.contentHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.topContent,
+.mediumContent {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.topContent p {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topContent p:hover,
+.mediumContent p:hover {
+  cursor: pointer;
+  background-color: #4C9300;
+  color: #fff;
+}
+
+.bottomContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#btnScheduled {
+  padding: 20px 40px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.topContent button {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 0;
+
+}
+
+.mediumContent button {
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  border: 0;
+}
+
+.selectedDay,
+.selectedTime,
+.topContent button:hover,
+.mediumContent button:hover {
+  background-color: #4C9300;
+  color: #fff;
+  cursor: pointer;
+
+}
+
+.containerFormStep3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.containerImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.justifyContentStart {
+  justify-content: start;
+}
+
+@media (max-width: 599px) {
+  .containerFormStep3 {
+    height: 100vh;
+
   }
 }

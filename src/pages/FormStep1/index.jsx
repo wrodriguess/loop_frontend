@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Container, Grid, Button } from '@mui/material';
 
-import './styles.css';
 import { FormContext } from '../../contexts/form';
 import Header from '../../components/Header';
 import VehicleCard from '../../components/VehicleCard';
@@ -119,34 +118,34 @@ export default function FormStep1() {
             {dia}<br />
             {ano}<br /> */}
 
-            <Container maxWidth="md" id="container">
+            <Container maxWidth="md" className="container">
                 <Grid container xs={12}>
                     <Grid item xs={12} sm={4}>
                         <VehicleCard vehicle={vehicle} />
                     </Grid>
 
-                    <Grid container xs={12} sm={8} id="right">
-                        <Grid item xs={12} p={1} id="topRight">
+                    <Grid container xs={12} sm={8} className="rightSide">
+                        <Grid item xs={12} p={1} className="topRight">
                             Agende o dia e horário da sua visita
                         </Grid>
-                        <Grid item xs={12} id="topMonth">
+                        <Grid item xs={12} className="contentHeader">
                             {scheduled.month} {scheduled.year}
                         </Grid>
-                        <Grid item xs={12} id="topDays">
+                        <Grid item xs={12} className="topContent">
                             {daysAvailable.map((day, index) => (
                                 <button key={index} className={scheduled.day == day[0] ? 'selectedDay' : ''} onClick={() => { setScheduled(prevState => { return { ...prevState, day: day[0], dayOfWeek: day[2] } }); setChosenDate(day[0]); }}>
                                     {day[1]}<br />{day[0]}
                                 </button>
                             ))}
                         </Grid>
-                        <Grid item xs={12} id="topHours">
+                        <Grid item xs={12} className="mediumContent">
                             {hourAvailable.map((hour, index) => (
                                 <button className={scheduled.hour == hour ? 'selectedTime' : ''} onClick={() => setScheduled(prevState => { return { ...prevState, hour: hour } })} disabled={!chosenDate ? true : false}>
                                     {hour}
                                 </button>
                             ))}
                         </Grid>
-                        <Grid item xs={12} id="topButton">
+                        <Grid item xs={12} className="bottomContent">
                             <Button variant="contained" color="error" id="btnScheduled" onClick={() => { navigate('/step2'); setScheduled(prevState => { return { ...prevState, address: {} } }); }} disabled={!(scheduled.day && scheduled.hour) ? true : false}>
                                 Agendar Visita
                             </Button>
