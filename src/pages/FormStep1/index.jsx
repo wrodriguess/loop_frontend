@@ -7,37 +7,33 @@ import Header from '../../components/Header';
 import VehicleCard from '../../components/VehicleCard';
 
 export default function FormStep1() {
-    const [hourAvailable, setHourAvailable] = useState([]);
-    const [chosenDate, setChosenDate] = useState();
-
     const navigate = useNavigate();
     const { step, setStep, scheduled, setScheduled, vehicle, allSchedules } = useContext(FormContext);
-    const { format } = require('date-fns');
+    const dayjs = require('dayjs');
+    var isoWeek = require('dayjs/plugin/isoWeek')
+    dayjs.extend(isoWeek)
+
+    // Recebe as horas livres
+    const [hourAvailable, setHourAvailable] = useState([]);
 
     useEffect(() => {
         setStep(1);
     }, []);
 
     useEffect(() => {
-        setHourAvailable(scheduleIsBusy(chosenDate));
-    }, [chosenDate]);
+        setHourAvailable(scheduleIsBusy(scheduled.day));
+    }, [scheduled.day]);
 
-    const date = new Date()
-    let semana = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
-    let dia_da_semana = semana[date.getDay()]
-    let mes = date.getMonth() + 1;
-    let dia = date.getDate();
-    let ano = date.getFullYear();
+    let daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    let months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
     function nextSixDays() {
-        let days = [
-            [19, 'SEG', 'Segunda-Feira'],
-            [20, 'TER', 'Terça-Feira'],
-            [21, 'QUA', 'Quarta-Feira'],
-            [22, 'QUI', 'Quinta-Feira'],
-            [23, 'SEX', 'Sexta-Feira'],
-            [24, 'SÁB', 'Sábado'],
-        ];
+        let days = [];
+
+        for (let i = 0; i < 6; i++) {
+            days.push(dayjs().add(i, 'day'))
+
+        }
 
         return days;
     }
@@ -58,7 +54,7 @@ export default function FormStep1() {
         let bussyHours = []
 
         allSchedules.forEach(bussyHour => {
-            if (bussyHour.date == `${2022}-09-${chosenDate}`) {
+            if (bussyHour.date == `${2022}-09-${scheduled.day}`) {
                 bussyHours.push(bussyHour.hour)
             }
         })
@@ -74,49 +70,17 @@ export default function FormStep1() {
         return aux;
     }
 
-    function monthInNumber(month) {
-        let monthLowercase = month.toLowerCase();
-        switch (monthLowercase) {
-            case 'janeiro':
-                return '01';
-            case 'fevereiro':
-                return '02';
-            case 'março':
-                return '03';
-            case 'abril':
-                return '04';
-            case 'maio':
-                return '05';
-            case 'junho':
-                return '06';
-            case 'julho':
-                return '07';
-            case 'agosto':
-                return '08';
-            case 'setembro':
-                return '09';
-            case 'outubro':
-                return '10';
-            case 'novembro':
-                return '11';
-            case 'dezembro':
-                return '12';
-            default:
-                console.log('Mês inválido');
-        }
+    function returnDayOfWeek(year, month, day) {
+        var fullDate = new Date(`${year}-${month}-${day}`);
+        var weekday = fullDate.getDay();
+        return daysOfWeek[weekday];
     }
 
-    // console.log(allSchedules);
     let daysAvailable = nextSixDays();
-    let hoursAvailable = generateBusinessHours();
 
     return (
         <>
             <Header />
-            {/* {dia_da_semana}<br />
-            {mes}<br />
-            {dia}<br />
-            {ano}<br /> */}
 
             <Container maxWidth="md" className="container">
                 <Grid container xs={12}>
@@ -129,18 +93,18 @@ export default function FormStep1() {
                             Agende o dia e horário da sua visita
                         </Grid>
                         <Grid item xs={12} className="contentHeader">
-                            {scheduled.month} {scheduled.year}
+                            {months[daysAvailable[0].$M]} {daysAvailable[0].$y}
                         </Grid>
                         <Grid item xs={12} className="topContent">
                             {daysAvailable.map((day, index) => (
-                                <button key={index} className={scheduled.day == day[0] ? 'selectedDay' : ''} onClick={() => { setScheduled(prevState => { return { ...prevState, day: day[0], dayOfWeek: day[2] } }); setChosenDate(day[0]); }}>
-                                    {day[1]}<br />{day[0]}
+                                <button key={index} className={scheduled.day == day.$D ? 'selectedDay' : ''} onClick={() => { setScheduled(prevState => { return { ...prevState, day: day.$D, dayOfWeek: day[2], hour: null } }); }}>
+                                    {returnDayOfWeek(day.$y, day.$M, day.$D)}<br />{day.$D}
                                 </button>
                             ))}
                         </Grid>
                         <Grid item xs={12} className="mediumContent">
                             {hourAvailable.map((hour, index) => (
-                                <button className={scheduled.hour == hour ? 'selectedTime' : ''} onClick={() => setScheduled(prevState => { return { ...prevState, hour: hour } })} disabled={!chosenDate ? true : false}>
+                                <button className={scheduled.hour == hour ? 'selectedTime' : ''} onClick={() => setScheduled(prevState => { return { ...prevState, hour: hour } })} disabled={!scheduled.day ? true : false}>
                                     {hour}
                                 </button>
                             ))}
