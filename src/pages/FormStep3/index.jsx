@@ -9,11 +9,18 @@ import sucess from '../../images/sucess.png';
 
 export default function FormStep1() {
     const navigate = useNavigate();
-    const { setUser, setStep, scheduled, setScheduled, vehicle } = useContext(FormContext);
+    const { user, setUser, setStep, scheduled, setScheduled, vehicle } = useContext(FormContext);
 
     useEffect(() => {
         setStep(3);
+        checkStep()
     }, [])
+
+    function checkStep() {
+        if (!scheduled.day && !scheduled.month && !scheduled.year && !user.name && !user.email && !user.telephone) {
+            navigate('/')
+        }
+    }
 
     function clearData() {
         setScheduled({

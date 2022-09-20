@@ -14,7 +14,14 @@ export default function FormStep2() {
 
     useEffect(() => {
         setStep(2);
+        checkStep()
     }, [])
+
+    function checkStep() {
+        if (!scheduled.day && !scheduled.month && !scheduled.year) {
+            navigate('/')
+        }
+    }
 
     function monthInNumber(month) {
         let monthLowercase = month.toLowerCase();
@@ -49,16 +56,13 @@ export default function FormStep2() {
     }
 
     async function schedule() {
-        // MELHORAR
-        await api.post('/scheduling/create.php', null, { params: { id_user: '2', id_vehicle: '2', date: `${scheduled.year}-${monthInNumber(scheduled.month)}-${scheduled.day}`, hour: scheduled.hour } })
+        await api.post('/scheduling/create.php', null, { params: { id_user: '2', id_vehicle: vehicle.id, date: `${scheduled.year}-${monthInNumber(scheduled.month)}-${scheduled.day}`, hour: scheduled.hour } })
             .then(navigate('/step3'))
             .catch(err => console.log(err))
     }
-
     return (
         <>
             <Header />
-
             <Container maxWidth="md" className="container">
                 <Grid item xs={12} >
                     <Button variant="text" onClick={() => { navigate('/'); }}>
