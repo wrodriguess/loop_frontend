@@ -17,7 +17,7 @@
         <b><a href="https://github.com/wrodriguess/loop_backend">Rode o back-end</a></b>
     </li>
     <li>
-        <b>Altere a url de conexão com o banco de dados</b>
+        <b>Altere a url de conexão com o back-end</b>
         <p>Se necessário em <b>src/services/api.js</b>, altere a base url para o caminho correspondente ao seu back-end</p>
     </li>
     <li>
