@@ -104,7 +104,7 @@ export default function FormStep1() {
                         </Grid>
                         <Grid item xs={12} className="mediumContent">
                             {hourAvailable.map((hour, index) => (
-                                <button className={scheduled.hour == hour ? 'selectedTime' : ''} onClick={() => setScheduled(prevState => { return { ...prevState, hour: hour } })} disabled={!scheduled.day ? true : false}>
+                                <button key={index} className={scheduled.hour == hour ? 'selectedTime' : ''} onClick={() => setScheduled(prevState => { return { ...prevState, hour: hour } })} disabled={!scheduled.day ? true : false}>
                                     {hour}
                                 </button>
                             ))}

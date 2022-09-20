@@ -86,16 +86,16 @@ export default function FormStep2() {
 
                         <Grid container justifyContent="center" className="contentTop">
                             <Grid item xs={11} className="contentTop">
-                                <TextField fullWidth id="outlined-basic" label="Nome" variant="outlined" defaultValue={user.name} onChange={(e) => setUser(prevState => { return { ...prevState, name: e.target.value } })} />
+                                <TextField fullWidth label="Nome" variant="outlined" defaultValue={user.name} onChange={(e) => setUser(prevState => { return { ...prevState, name: e.target.value } })} />
                             </Grid>
                         </Grid>
 
                         <Grid container justifyContent="space-around" className="mediumContent">
                             <Grid item xs={5} id="inputEmail">
-                                <TextField fullWidth id="outlined-basic" label="E-mail" variant="outlined" defaultValue={user.email} onChange={(e) => setUser(prevState => { return { ...prevState, email: e.target.value } })} />
+                                <TextField fullWidth label="E-mail" variant="outlined" defaultValue={user.email} onChange={(e) => setUser(prevState => { return { ...prevState, email: e.target.value } })} />
                             </Grid>
                             <Grid item xs={5} id="inputTelephone">
-                                <TextField fullWidth id="outlined-basic" label="Telefone" variant="outlined" defaultValue={user.telephone} onChange={(e) => setUser(prevState => { return { ...prevState, telephone: e.target.value } })} />
+                                <TextField fullWidth label="Telefone" variant="outlined" defaultValue={user.telephone} onChange={(e) => setUser(prevState => { return { ...prevState, telephone: e.target.value } })} />
                             </Grid>
                         </Grid>
 

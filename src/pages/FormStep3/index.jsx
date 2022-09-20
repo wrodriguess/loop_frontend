@@ -49,7 +49,7 @@ export default function FormStep1() {
                     Agendamento Concluído!
                 </Grid>
 
-                <Grid container XS={12} >
+                <Grid container xs={12} >
                     <Grid item p={3} xs={12} sm={6}>
                         <CalendarToday />
                         {scheduled.dayOfWeek}, {scheduled.day} {scheduled.month} {scheduled.year} às {scheduled.hour}
