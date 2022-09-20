@@ -9,8 +9,8 @@ export function FormProvider({ children }) {
     const [scheduled, setScheduled] = useState({
         day: '',
         dayOfWeek: '',
-        month: 'Setembro',
-        year: '2022',
+        month: '',
+        year: '',
         hour: '',
     });
 
