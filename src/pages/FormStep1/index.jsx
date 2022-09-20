@@ -97,7 +97,7 @@ export default function FormStep1() {
                         </Grid>
                         <Grid item xs={12} className="topContent">
                             {daysAvailable.map((day, index) => (
-                                <button key={index} className={scheduled.day == day.$D ? 'selectedDay' : ''} onClick={() => { setScheduled(prevState => { return { ...prevState, day: day.$D, dayOfWeek: day[2], hour: null } }); }}>
+                                < button key={index} className={scheduled.day == day.$D ? 'selectedDay' : ''} onClick={() => { setScheduled(prevState => { return { ...prevState, day: day.$D, month: months[day.$M], year: day.$y, dayOfWeek: returnDayOfWeek(day.$y, day.$M, day.$D) } }); }}>
                                     {returnDayOfWeek(day.$y, day.$M, day.$D)}<br />{day.$D}
                                 </button>
                             ))}
@@ -110,7 +110,7 @@ export default function FormStep1() {
                             ))}
                         </Grid>
                         <Grid item xs={12} className="bottomContent">
-                            <Button variant="contained" color="error" id="btnScheduled" onClick={() => { navigate('/step2'); setScheduled(prevState => { return { ...prevState, address: {} } }); }} disabled={!(scheduled.day && scheduled.hour) ? true : false}>
+                            <Button variant="contained" color="error" id="btnScheduled" onClick={() => { navigate('/step2'); }} disabled={!(scheduled.day && scheduled.hour) ? true : false}>
                                 Agendar Visita
                             </Button>
                         </Grid>
